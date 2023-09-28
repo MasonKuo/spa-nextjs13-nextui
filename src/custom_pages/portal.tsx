@@ -3,7 +3,6 @@ import { Input } from "@nextui-org/react";
 const Portal = () => {
   return (
     <>
-      Portal
       <div>
         <Input isClearable />
       </div>

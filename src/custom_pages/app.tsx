@@ -10,8 +10,6 @@ import { AliveScope } from "react-activation";
 import {
   Button,
   Link as UILink,
-  Menu,
-  MenuItem,
   Navbar,
   NavbarBrand,
   NavbarContent,
@@ -21,8 +19,6 @@ import {
   NavbarMenuItem,
   Tabs,
   Tab,
-  Card,
-  CardBody,
   ButtonGroup,
   Chip,
 } from "@nextui-org/react";
@@ -75,7 +71,9 @@ const NavContainer = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const location = useLocation();
   const matchKey = useMemo(() => {
-    const [{ route }] = matchRoutes(navList, location) as any[];
+    const matchs = matchRoutes(navList, location);
+    if (!matchs) return null;
+    const [{ route }] = matchs ?? [];
 
     return route.key;
   }, [location]);
@@ -124,13 +122,13 @@ const NavContainer = () => {
               </Link>
             ) : (
               <UILink
-                color={
-                  index === 2
-                    ? "primary"
-                    : index === navList.length - 1
-                    ? "danger"
-                    : "foreground"
-                }
+                // color={
+                //   index === 2
+                //     ? "primary"
+                //     : index === navList.length - 1
+                //     ? "danger"
+                //     : "foreground"
+                // }
                 className="w-full"
                 href={item.path}
                 size="lg"
@@ -165,29 +163,30 @@ const NavContainer = () => {
 //       "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
 //   },
 // ];
+export const CloseIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="1.5"
+      stroke="currentColor"
+      className="w-3 h-3"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M6 18L18 6M6 6l12 12"
+      />
+    </svg>
+  );
+};
+
 const TabsContainer = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [selectedKey, setSelectedKey] = useState<string>();
   const [activeTabs, setActiveTabs] = useState<any[]>(navList);
-  const CloseIcon = () => {
-    return (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth="1.5"
-        stroke="currentColor"
-        className="w-3 h-3"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M6 18L18 6M6 6l12 12"
-        />
-      </svg>
-    );
-  };
   const TabHeader = ({
     label,
     onClick,
@@ -230,8 +229,7 @@ const TabsContainer = () => {
 
   return (
     <>
-      <div className="flex w-full flex-col">
-        {selectedKey}
+      <div className="flex w-full flex-col px-2">
         <Tabs
           aria-label="Dynamic tabs"
           // items={activeTabs}
@@ -260,15 +258,19 @@ const TabsContainer = () => {
                       variant="light"
                       className="hidden group-hover:flex"
                       color="danger"
-                      onClick={(e) => {
-                        e.stopPropagation();
+                      onClose={(e) => {
+                        // e.stopPropagation();
                         handleDelete(item);
                       }}
-                      onPointerDown={(e) => {
-                        e.stopPropagation();
-                      }}
+                      // onClick={(e) => {
+                      //   e.stopPropagation();
+                      //   handleDelete(item);
+                      // }}
+                      // onPointerDown={(e) => {
+                      //   e.stopPropagation();
+                      // }}
                     >
-                      <CloseIcon />
+                      {/* <CloseIcon /> */}
                     </Chip>
                   )}
                 </TabHeader>
@@ -288,12 +290,16 @@ const TabsContainer = () => {
 export default function App() {
   return (
     <BrowserRouter>
-      <NavContainer />
-      <div className="mx-2">
-        <TabsContainer />
-        <AliveScope>
-          <Router />
-        </AliveScope>
+      <div className="h-screen flex flex-col">
+        <NavContainer />
+        <div className="flex-1 flex flex-col overflow-auto">
+          <TabsContainer />
+          <div className="m-2 overflow-auto flex-1">
+            <AliveScope>
+              <Router />
+            </AliveScope>
+          </div>
+        </div>
       </div>
     </BrowserRouter>
   );
