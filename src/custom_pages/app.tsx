@@ -232,6 +232,7 @@ const TabsContainer = () => {
       <div className="flex w-full flex-col px-2">
         <Tabs
           aria-label="Dynamic tabs"
+          variant="light"
           // items={activeTabs}
           selectedKey={selectedKey}
           // onSelectionChange={(e) => {

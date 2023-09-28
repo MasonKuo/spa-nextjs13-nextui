@@ -4,7 +4,7 @@ const Portal = () => {
   return (
     <>
       <div>
-        <Input isClearable />
+        <Input isClearable className="max-w-xs"/>
       </div>
       {/* <Link to="/redirect">Redirect</Link> */}
     </>
