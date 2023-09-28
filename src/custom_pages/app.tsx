@@ -242,7 +242,6 @@ const TabsContainer = () => {
           {activeTabs.map((item) => (
             <Tab
               key={item.key}
-              className={!item.static ? "hover:pr-0" : ""}
               title={
                 <TabHeader
                   label={item.title}
@@ -253,10 +252,9 @@ const TabsContainer = () => {
                 >
                   {!item.static && (
                     <Chip
-                      // isIconOnly
                       size="sm"
                       variant="light"
-                      className="hidden group-hover:flex"
+                      className="group-hover:flex sm:hidden"
                       color="danger"
                       onClose={(e) => {
                         // e.stopPropagation();
