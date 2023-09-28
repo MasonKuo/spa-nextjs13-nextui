@@ -32,7 +32,7 @@ const LoginPage = () => {
             /> */}
             <div className="flex flex-col">
               <p className="text-md">Login</p>
-              <p className="text-small text-default-500">erp.opene.com</p>
+              <p className="text-small text-default-500">spa.vercel.com</p>
             </div>
           </CardHeader>
           <Divider />

@@ -87,7 +87,7 @@ const NavContainer = () => {
         />
         <NavbarBrand>
           <AcmeLogo />
-          <p className="font-bold text-inherit">Opene ERP</p>
+          <p className="font-bold text-inherit">Vercel Spa</p>
         </NavbarBrand>
       </NavbarContent>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
