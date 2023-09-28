@@ -293,7 +293,7 @@ export default function App() {
         <NavContainer />
         <div className="flex-1 flex flex-col overflow-auto">
           <TabsContainer />
-          <div className="m-2 overflow-auto flex-1">
+          <div className="m-2 overflow-auto flex-1 p-3">
             <AliveScope>
               <Router />
             </AliveScope>
