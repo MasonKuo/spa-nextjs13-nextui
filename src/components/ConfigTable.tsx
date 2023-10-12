@@ -17,6 +17,9 @@ import {
   Selection,
   ChipProps,
   SortDescriptor,
+  Select,
+  SelectItem,
+  Avatar,
 } from "@nextui-org/react";
 import { columns, users, statusOptions } from "./data";
 import React from "react";

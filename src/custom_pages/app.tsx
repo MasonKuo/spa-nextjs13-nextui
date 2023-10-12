@@ -5,6 +5,7 @@ import {
   matchRoutes,
   useNavigate,
 } from "react-router-dom";
+import { useRef } from "react";
 import { Router } from "../../routes/index";
 import { AliveScope } from "react-activation";
 import {
@@ -65,6 +66,30 @@ export const navList = [
     path: "/integrations",
     refresh: false,
   },
+  {
+    key: "integrations1",
+    title: "Integrations1",
+    path: "/integrations1",
+    refresh: false,
+  },
+  {
+    key: "integrations2",
+    title: "Integrations2",
+    path: "/integrations2",
+    refresh: false,
+  },
+  {
+    key: "integrations3",
+    title: "Integrations3",
+    path: "/integrations3",
+    refresh: false,
+  },
+  {
+    key: "integrations4",
+    title: "Integrations4",
+    path: "/integrations4",
+    refresh: false,
+  },
 ];
 
 const NavContainer = () => {
@@ -90,7 +115,10 @@ const NavContainer = () => {
           <p className="font-bold text-inherit">Vercel Spa</p>
         </NavbarBrand>
       </NavbarContent>
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+      <NavbarContent
+        className="w-full hidden sm:flex gap-4 overflow-x-scroll scrollbar-hide"
+        justify="start"
+      >
         {navList.map((i) => (
           <NavbarItem key={i.key} isActive={i.key === matchKey}>
             <Link color={i.color} to={i.path}>
@@ -183,6 +211,7 @@ export const CloseIcon = () => {
 };
 
 const TabsContainer = () => {
+  const tabsRef = useRef<any>();
   const navigate = useNavigate();
   const location = useLocation();
   const [selectedKey, setSelectedKey] = useState<string>();
@@ -227,12 +256,37 @@ const TabsContainer = () => {
     // !route && setActiveTabs((routes) => [...routes, navRoute.route]);
   }, [location, activeTabs]);
 
+  useEffect(() => {
+    const parent = tabsRef?.current;
+    const parentWidth = parent?.clientWidth;
+    const childs: any[] = Array.from(parent?.children);
+    const childrensData = childs?.map((i) => ({
+      key: i.getAttribute("data-key"),
+      offset: i.offsetLeft,
+      _: i,
+    }));
+
+    const currentChildren = childrensData?.find((i) => i.key === selectedKey);
+    const offset = currentChildren?.offset;
+    currentChildren &&
+      (offset > parentWidth || parent.scrollLeft > offset) &&
+      setTimeout(() => {
+        const fixvalue = currentChildren._?.clientWidth;
+        tabsRef.current.scrollTo({
+          left: offset - fixvalue / 2,
+        });
+      }, 0);
+    // tabsRef.current.scrollLeft()
+    // console.log(tabsRef);
+  }, [selectedKey]);
+
   return (
     <>
       <div className="flex w-full flex-col px-2">
         <Tabs
           aria-label="Dynamic tabs"
-          variant="light"
+          ref={tabsRef}
+          variant="solid"
           // items={activeTabs}
           selectedKey={selectedKey}
           // onSelectionChange={(e) => {
@@ -255,7 +309,7 @@ const TabsContainer = () => {
                     <Chip
                       size="sm"
                       variant="light"
-                      className="group-hover:flex sm:hidden"
+                      className="group-hover:visible sm:invisible"
                       color="danger"
                       onClose={(e) => {
                         // e.stopPropagation();
