@@ -258,7 +258,7 @@ const TabsContainer = () => {
 
   useEffect(() => {
     const parent = tabsRef?.current;
-    const parentWidth = parent?.clientWidth;
+    // const parentWidth = parent?.clientWidth;
     const childs: any[] = Array.from(parent?.children);
     const childrensData = childs?.map((i) => ({
       key: i.getAttribute("data-key"),
@@ -269,7 +269,6 @@ const TabsContainer = () => {
     const currentChildren = childrensData?.find((i) => i.key === selectedKey);
     const offset = currentChildren?.offset;
     currentChildren &&
-      (offset > parentWidth || parent.scrollLeft > offset) &&
       setTimeout(() => {
         const fixvalue = currentChildren._?.clientWidth;
         tabsRef.current.scrollTo({
