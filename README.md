@@ -24,3 +24,7 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 - [router] 路由配置 react-router
 
 ## Deploy
+
+## Prisma
+
+- [更新数据结构] npx prisma generate

@@ -258,7 +258,6 @@ const TabsContainer = () => {
 
   useEffect(() => {
     const parent = tabsRef?.current;
-    // const parentWidth = parent?.clientWidth;
     const childs: any[] = Array.from(parent?.children);
     const childrensData = childs?.map((i) => ({
       key: i.getAttribute("data-key"),
@@ -275,8 +274,6 @@ const TabsContainer = () => {
           left: offset - fixvalue / 2,
         });
       }, 0);
-    // tabsRef.current.scrollLeft()
-    // console.log(tabsRef);
   }, [selectedKey]);
 
   return (

@@ -28,6 +28,11 @@ export const routes = [
     //   ]
   },
   {
+    path: "/features",
+    auth: false,
+    component: lazy(() => import("src/custom_pages/features")),
+  },
+  {
     path: "*",
     auth: false,
     component: lazy(() => import("src/custom_pages/error")),
