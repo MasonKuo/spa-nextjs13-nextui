@@ -340,7 +340,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <div className="h-screen flex flex-col">
-        {/* <NavContainer /> */}
+        <NavContainer />
         <div className="flex-1 flex flex-col overflow-auto">
           <TabsContainer />
           <div className="m-2 overflow-auto flex-1 p-3">
