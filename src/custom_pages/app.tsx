@@ -339,7 +339,7 @@ const TabsContainer = () => {
 export default function App() {
   return (
     <BrowserRouter>
-      <div className="h-screen flex flex-col">
+      {/* <div className="h-screen flex flex-col">
         <NavContainer />
         <div className="flex-1 flex flex-col overflow-auto">
           <TabsContainer />
@@ -349,7 +349,7 @@ export default function App() {
             </AliveScope>
           </div>
         </div>
-      </div>
+      </div> */}
     </BrowserRouter>
   );
 }
