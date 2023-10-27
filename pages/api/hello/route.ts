@@ -13,9 +13,16 @@ export async function POST(request: Request) {
     if (!name) {
       return new NextResponse("name can't be empty", { status: 404 });
     }
-    const user = await prisma.person.create({
-      data: { name },
-    });
+    const user = await prisma.person
+      .create({
+        data: { name },
+      })
+      .catch((e) => {
+        return NextResponse.json(e, {
+          status: 500,
+          statusText: `create ${name} failed`,
+        });
+      });
 
     return NextResponse.json(user, {
       status: 200,

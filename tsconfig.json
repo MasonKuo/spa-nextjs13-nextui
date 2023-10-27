@@ -25,7 +25,7 @@
     ],
     "paths": {
       "@components/*": ["./components/*"],
-      "@app/*": ["./app/*"],
+      "@app/*": ["pages/*"],
       "@pages/*": ["src/custom_pages/*"]
     }
   },
