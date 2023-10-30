@@ -60,36 +60,36 @@ export const navList = [
     color: "foreground",
     refresh: false,
   },
-  {
-    key: "integrations",
-    title: "Integrations",
-    path: "/integrations",
-    refresh: false,
-  },
-  {
-    key: "integrations1",
-    title: "Integrations1",
-    path: "/integrations1",
-    refresh: false,
-  },
-  {
-    key: "integrations2",
-    title: "Integrations2",
-    path: "/integrations2",
-    refresh: false,
-  },
-  {
-    key: "integrations3",
-    title: "Integrations3",
-    path: "/integrations3",
-    refresh: false,
-  },
-  {
-    key: "integrations4",
-    title: "Integrations4",
-    path: "/integrations4",
-    refresh: false,
-  },
+  // {
+  //   key: "integrations",
+  //   title: "Integrations",
+  //   path: "/integrations",
+  //   refresh: false,
+  // },
+  // {
+  //   key: "integrations1",
+  //   title: "Integrations1",
+  //   path: "/integrations1",
+  //   refresh: false,
+  // },
+  // {
+  //   key: "integrations2",
+  //   title: "Integrations2",
+  //   path: "/integrations2",
+  //   refresh: false,
+  // },
+  // {
+  //   key: "integrations3",
+  //   title: "Integrations3",
+  //   path: "/integrations3",
+  //   refresh: false,
+  // },
+  // {
+  //   key: "integrations4",
+  //   title: "Integrations4",
+  //   path: "/integrations4",
+  //   refresh: false,
+  // },
 ];
 
 const NavContainer = () => {
