@@ -38,4 +38,4 @@ next-env.d.ts
 logs/
 
 # db env
-.env
+/.env
