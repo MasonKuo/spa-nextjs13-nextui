@@ -23,6 +23,7 @@ export async function POST(request: Request) {
       statusText: `create ${name} success`,
     });
   } catch (error: any) {
+    logger.error("api error");
     logger.error(error?.message);
     return NextResponse.json(
       { msg: "Server Error" },
