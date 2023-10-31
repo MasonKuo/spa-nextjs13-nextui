@@ -1,5 +1,6 @@
 import prisma from "../../../lib/prisma";
 import { NextResponse } from "next/server";
+const logger = require("@lib/logger");
 
 export async function GET(_: Request) {
   const users = await prisma.person.findMany();
@@ -22,6 +23,7 @@ export async function POST(request: Request) {
       statusText: `create ${name} success`,
     });
   } catch (error) {
+    logger(error);
     return NextResponse.json(
       { msg: "Server Error" },
       {
