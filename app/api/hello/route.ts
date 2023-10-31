@@ -22,8 +22,8 @@ export async function POST(request: Request) {
       status: 200,
       statusText: `create ${name} success`,
     });
-  } catch (error) {
-    logger(error);
+  } catch (error: any) {
+    logger.error(error?.message);
     return NextResponse.json(
       { msg: "Server Error" },
       {

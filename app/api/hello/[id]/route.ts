@@ -1,5 +1,6 @@
 import prisma from "../../../../lib/prisma";
 import { NextResponse } from "next/server";
+const logger = require("@lib/logger");
 
 export async function GET(
   request: Request,
@@ -32,6 +33,7 @@ export async function DELETE(
 
     return new NextResponse(null, { status: 204 });
   } catch (error: any) {
+    logger.error(error?.message);
     if (error.code === "P2025") {
       return NextResponse.json(
         { msg: "No user with ID found" },
