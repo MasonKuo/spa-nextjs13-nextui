@@ -23,7 +23,7 @@ const generateRouter = (routers: any) => {
     }
     if (item.component) {
       item.element = (
-        <KeepAlive id={item.path}>
+        <KeepAlive id={item.path} name={item.path}>
           <Suspense fallback={<div>Loading...</div>}>
             {/* 把懒加载的异步路由变成组件装载进去 */}
             <item.component />
