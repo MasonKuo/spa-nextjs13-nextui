@@ -28,3 +28,5 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 ## Prisma
 
 - [更新数据结构] npx prisma generate
+- [拉取数据结构] npm run dbpull
+- [推送数据结构] npm run dbpush

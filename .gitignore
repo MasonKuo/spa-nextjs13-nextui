@@ -39,3 +39,6 @@ logs/
 
 # db env
 .env
+
+# vs settings
+settings.json

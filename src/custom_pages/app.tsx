@@ -7,7 +7,11 @@ import {
 } from "react-router-dom";
 import { useRef } from "react";
 import { Router } from "../../routes/index";
-import { AliveScope } from "react-activation";
+import {
+  AliveScope,
+  withAliveScope,
+  useAliveController,
+} from "react-activation";
 import {
   Button,
   Link as UILink,
@@ -211,6 +215,8 @@ export const CloseIcon = () => {
 };
 
 const TabsContainer = () => {
+  const { drop, dropScope, clear, getCachingNodes } = useAliveController();
+
   const tabsRef = useRef<any>();
   const navigate = useNavigate();
   const location = useLocation();
@@ -240,6 +246,8 @@ const TabsContainer = () => {
 
     selectedKey === delTab.key && navigate(preTab.path);
     setActiveTabs((tabs) => tabs.filter((_, index) => index !== delIndex));
+    // drop keepalive by component name
+    drop(delTab.path);
   };
 
   useEffect(() => {
@@ -336,7 +344,7 @@ const TabsContainer = () => {
   );
 };
 
-export default function App() {
+export default function App(props) {
   return (
     <BrowserRouter>
       <div className="h-screen flex flex-col">
