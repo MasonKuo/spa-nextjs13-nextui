@@ -1,3 +1,4 @@
+import { apiLogger } from "@lib/loggerFormat";
 import prisma from "../../../lib/prisma";
 import { NextResponse } from "next/server";
 const logger = require("@lib/logger");
@@ -23,8 +24,7 @@ export async function POST(request: Request) {
       statusText: `create ${name} success`,
     });
   } catch (error: any) {
-    logger.error("api error");
-    logger.error(error?.message);
+    apiLogger(json, error?.message);
     return NextResponse.json(
       { msg: "Server Error" },
       {

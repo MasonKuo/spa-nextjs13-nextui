@@ -50,24 +50,6 @@ export const ChevronDownIcon = ({ strokeWidth = 1.5, ...otherProps }) => (
   </svg>
 );
 
-export const VerticalDotsIcon = ({ size = 24, width, height, ...props }) => (
-  <svg
-    aria-hidden="true"
-    fill="none"
-    focusable="false"
-    height={size || height}
-    role="presentation"
-    viewBox="0 0 24 24"
-    width={size || width}
-    {...props}
-  >
-    <path
-      d="M12 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 12c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
-      fill="currentColor"
-    />
-  </svg>
-);
-
 export const SearchIcon = (props) => (
   <svg
     aria-hidden="true"
@@ -120,17 +102,15 @@ export const PlusIcon = ({ size = 24, width, height, ...props }) => (
   </svg>
 );
 
-const statusColorMap: Record<string, ChipProps["color"]> = {
-  active: "success",
-  paused: "danger",
-  vacation: "warning",
-};
-
 const INITIAL_VISIBLE_COLUMNS = ["name", "role", "status", "actions"];
 
 type User = (typeof users)[0];
 
-export default function App() {
+export default function ConfigTable({
+  loading = false,
+  columns = [],
+  dataSource = [],
+}) {
   const [filterValue, setFilterValue] = React.useState("");
   const [selectedKeys, setSelectedKeys] = React.useState<Selection>(
     new Set([])
@@ -158,7 +138,7 @@ export default function App() {
   }, [visibleColumns]);
 
   const filteredItems = React.useMemo(() => {
-    let filteredUsers = [...users];
+    let filteredUsers = [...dataSource];
 
     if (hasSearchFilter) {
       filteredUsers = filteredUsers.filter((user) =>
@@ -175,7 +155,7 @@ export default function App() {
     }
 
     return filteredUsers;
-  }, [users, filterValue, statusFilter]);
+  }, [dataSource, filterValue, statusFilter]);
 
   const pages = Math.ceil(filteredItems.length / rowsPerPage);
 
@@ -196,64 +176,10 @@ export default function App() {
     });
   }, [sortDescriptor, items]);
 
-  const renderCell = React.useCallback((user: User, columnKey: React.Key) => {
-    const cellValue = user[columnKey as keyof User];
-
-    switch (columnKey) {
-      case "name":
-        return (
-          <User
-            avatarProps={{ radius: "lg", src: user.avatar }}
-            description={user.email}
-            name={cellValue}
-          >
-            {user.email}
-          </User>
-        );
-      case "role":
-        return (
-          <div className="flex flex-col">
-            <p className="text-bold text-small capitalize">{cellValue}</p>
-            <p className="text-bold text-tiny capitalize text-default-400">
-              {user.team}
-            </p>
-          </div>
-        );
-      case "status":
-        return (
-          <Chip
-            className="capitalize"
-            color={statusColorMap[user.status]}
-            size="sm"
-            variant="flat"
-          >
-            {cellValue}
-          </Chip>
-        );
-      case "actions":
-        return (
-          <div className="relative flex justify-end items-center gap-2">
-            <Dropdown>
-              <DropdownTrigger>
-                <Button isIconOnly size="sm" variant="light">
-                  <VerticalDotsIcon
-                    className="text-default-300"
-                    width={undefined}
-                    height={undefined}
-                  />
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu>
-                <DropdownItem>View</DropdownItem>
-                <DropdownItem>Edit</DropdownItem>
-                <DropdownItem>Delete</DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
-          </div>
-        );
-      default:
-        return cellValue;
-    }
+  const renderCell = React.useCallback((item, columnKey: React.Key) => {
+    const cellValue = item[columnKey as keyof User];
+    const col = columns.find((i) => i.uid === columnKey);
+    return col.render ? col.render(cellValue, item) : cellValue;
   }, []);
 
   const onNextPage = React.useCallback(() => {
@@ -352,17 +278,11 @@ export default function App() {
                 ))}
               </DropdownMenu>
             </Dropdown>
-            <Button
-              color="primary"
-              endContent={<PlusIcon width={undefined} height={undefined} />}
-            >
-              Add New
-            </Button>
           </div>
         </div>
         <div className="flex justify-between items-center">
           <span className="text-default-400 text-small">
-            Total {users.length} users
+            Total {dataSource.length} users
           </span>
           <label className="flex items-center text-default-400 text-small">
             Rows per page:
@@ -384,7 +304,7 @@ export default function App() {
     visibleColumns,
     onSearchChange,
     onRowsPerPageChange,
-    users.length,
+    dataSource.length,
     hasSearchFilter,
   ]);
 
@@ -425,7 +345,7 @@ export default function App() {
         </div>
       </div>
     );
-  }, [selectedKeys, items.length, page, pages, hasSearchFilter]);
+  }, [selectedKeys, filteredItems, items.length, page, pages, hasSearchFilter]);
 
   return (
     <Table
@@ -455,7 +375,11 @@ export default function App() {
           </TableColumn>
         )}
       </TableHeader>
-      <TableBody emptyContent={"No users found"} items={sortedItems}>
+      <TableBody
+        isLoading={loading}
+        emptyContent={"No users found"}
+        items={sortedItems}
+      >
         {(item) => (
           <TableRow key={item.id}>
             {(columnKey) => (

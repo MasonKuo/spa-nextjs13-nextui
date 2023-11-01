@@ -1,4 +1,67 @@
+import { Chip, ChipProps, User } from "@nextui-org/react";
 import React from "react";
+
+export const VerticalDotsIcon = ({ size = 24, width, height, ...props }) => (
+  <svg
+    aria-hidden="true"
+    fill="none"
+    focusable="false"
+    height={size || height}
+    role="presentation"
+    viewBox="0 0 24 24"
+    width={size || width}
+    {...props}
+  >
+    <path
+      d="M12 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 12c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+      fill="currentColor"
+    />
+  </svg>
+);
+
+const statusColorMap: Record<string, ChipProps["color"]> = {
+  active: "success",
+  paused: "danger",
+  vacation: "warning",
+};
+
+export const renderFn = {
+  name: (v, r) => {
+    return (
+      <User
+        avatarProps={{ radius: "lg", src: r.avatar }}
+        description={r.email}
+        name={v}
+      >
+        {r.email}
+      </User>
+    );
+  },
+  role: (v, r) => {
+    return (
+      <div className="flex flex-col">
+        <p className="text-bold text-small capitalize">{v}</p>
+        <p className="text-bold text-tiny capitalize text-default-400">
+          {r.team ?? "--"}
+        </p>
+      </div>
+    );
+  },
+  status: (v, r) => {
+    return (
+      v && (
+        <Chip
+          className="capitalize"
+          color={statusColorMap[v]}
+          size="sm"
+          variant="flat"
+        >
+          {v}
+        </Chip>
+      )
+    );
+  },
+};
 
 const columns = [
   { name: "ID", uid: "id", sortable: true },

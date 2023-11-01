@@ -1,3 +1,4 @@
+import { apiLogger } from "@lib/loggerFormat";
 import prisma from "../../../../lib/prisma";
 import { NextResponse } from "next/server";
 const logger = require("@lib/logger");
@@ -33,7 +34,8 @@ export async function DELETE(
 
     return new NextResponse(null, { status: 204 });
   } catch (error: any) {
-    logger.error(error?.message);
+    apiLogger(params, error?.message);
+
     if (error.code === "P2025") {
       return NextResponse.json(
         { msg: "No user with ID found" },
