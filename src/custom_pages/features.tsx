@@ -4,13 +4,13 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
+  Input,
 } from "@nextui-org/react";
-// import useSWR from "swr";
-import axios from "axios";
-import { useState } from "react";
+import { useRef, useState, useImperativeHandle } from "react";
 import ConfigTable, { PlusIcon } from "src/components/ConfigTable";
 import { VerticalDotsIcon, renderFn } from "src/components/data";
-import { useRequest } from "@lib/request";
+import ActionsModal, { ModalProps } from "src/components/ActionsModal";
+import { UserService } from "service/user";
 
 const columns = [
   { name: "ID", uid: "id", sortable: true },
@@ -28,29 +28,76 @@ const columns = [
 //   return res.json();
 // }
 
+const initModalProps: ModalProps = {
+  title: "",
+  isOpen: false,
+  onOK: null,
+  onClose: null,
+  otherActions: null,
+  children: null,
+};
+
+const CreatePanel = ({ myref, callback }: { myref?; callback? }) => {
+  const [username, setUsername] = useState<any>();
+  useImperativeHandle(myref, () => ({
+    username,
+  }));
+
+  return (
+    <>
+      <Input
+        autoFocus
+        onChange={(e) => setUsername(e.target.value)}
+        onKeyDown={(e) => e.keyCode === 13 && callback?.()}
+      />
+    </>
+  );
+};
+
 const Features = (props) => {
+  const myref = useRef<any>();
+  const modref = useRef<any>();
   const [cache, setCache] = useState(0);
+  const [modalProps, setModalProps] = useState(initModalProps);
+  const initModal = () => setModalProps(initModalProps);
   const toggle = () => setCache(new Date().getTime());
   const [isLoading, setIsLoading] = useState(false);
 
-  const { loading, result } = useRequest("/api/hello", {
+  const { loading, result } = UserService.UserList({
     trigger: cache,
   });
 
-  const handleCreateUser = async () => {
+  const createUser = async (name) => {
     try {
       setIsLoading(true);
-      const res = await axios.post("/api/hello", { name: "Jacky123" });
+      await UserService.CreateUser({ name });
       toggle();
     } catch (error: any) {
       alert(JSON.stringify(error?.response?.data?.msg));
     }
     setIsLoading(false);
   };
+
+  const handleCreateUser = () => {
+    setModalProps({
+      title: "Add New User",
+      isOpen: true,
+      onClose: initModal,
+      onOK: () => {
+        const username = myref.current.username;
+        createUser(username);
+        initModal();
+      },
+      children: (
+        <CreatePanel myref={myref} callback={() => modref.current.onOK()} />
+      ),
+    });
+  };
+
   const handleDelUser = async (id) => {
     try {
       setIsLoading(true);
-      const res = await axios.delete(`/api/hello/${id}`);
+      await UserService.DelUser(id);
       // alert("Del User Success!");
       toggle();
     } catch (error: any) {
@@ -101,7 +148,7 @@ const Features = (props) => {
         onClick={handleCreateUser}
         isLoading={isLoading}
       >
-        Add New
+        Add
       </Button>
       <div className="py-2">
         <ConfigTable
@@ -110,6 +157,7 @@ const Features = (props) => {
           dataSource={result?.data}
         />
       </div>
+      <ActionsModal myref={modref} {...modalProps} />
     </>
   );
 };

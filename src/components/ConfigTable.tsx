@@ -102,7 +102,7 @@ export const PlusIcon = ({ size = 24, width, height, ...props }) => (
   </svg>
 );
 
-const INITIAL_VISIBLE_COLUMNS = ["name", "role", "status", "actions"];
+const INITIAL_VISIBLE_COLUMNS = ["id", "name", "role", "status", "actions"];
 
 type User = (typeof users)[0];
 

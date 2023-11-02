@@ -24,6 +24,7 @@
     "next": "13.4.19",
     "next-themes": "^0.2.1",
     "postcss": "8.4.29",
+    "qs": "^6.11.2",
     "react": "18.2.0",
     "react-activation": "^0.12.4",
     "react-dom": "18.2.0",
