@@ -136,7 +136,7 @@ const NavContainer = () => {
           <UILink href="login">Login</UILink>
         </NavbarItem>
         <NavbarItem>
-          <Button as={UILink} color="primary" href="/signin" variant="flat">
+          <Button as={UILink} color="primary" href="/signup" variant="flat">
             Sign Up
           </Button>
         </NavbarItem>

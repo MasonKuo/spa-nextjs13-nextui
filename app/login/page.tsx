@@ -64,9 +64,20 @@ const LoginPage = () => {
             >
               Forgot Password?
             </Link>
-            <Button color="primary" onClick={handleLogin}>
-              Login
-            </Button>
+            <div>
+              <Button color="primary" onClick={handleLogin}>
+                Login
+              </Button>
+              <Button
+                className="ml-2"
+                as={Link}
+                color="success"
+                href="/signup"
+                variant="light"
+              >
+                Sign Up
+              </Button>
+            </div>
           </CardFooter>
         </Card>
       </div>

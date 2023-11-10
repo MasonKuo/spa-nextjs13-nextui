@@ -1,7 +1,7 @@
 import { apiLogger } from "@lib/loggerFormat";
 import prisma from "../../../../lib/prisma";
 import { NextResponse } from "next/server";
-// const logger = require("@lib/logger");
+const logger = require("@lib/logger");
 
 export async function GET(
   request: Request,

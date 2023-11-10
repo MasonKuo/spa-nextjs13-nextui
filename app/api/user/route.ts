@@ -20,10 +20,7 @@ export async function POST(request: Request) {
   try {
     const _name = name?.trim();
     if (!_name) {
-      return NextResponse.json(
-        { msg: "email can't be empty" },
-        { status: 400 }
-      );
+      return NextResponse.json({ msg: "name can't be empty" }, { status: 400 });
     }
     const user = await prisma.person.create({
       data: { name: _name },

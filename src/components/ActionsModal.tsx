@@ -52,7 +52,7 @@ export default function ActionsModal({
 
   return (
     <>
-      <Modal size={size} isOpen={isOpen} onClose={onClose}>
+      <Modal size={size} isOpen={isOpen} onClose={onClose} placement="center">
         <ModalContent>
           {(onClose) => (
             <>
