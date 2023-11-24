@@ -152,7 +152,7 @@ const Features = (props) => {
       </Button>
       <div className="py-2">
         <ConfigTable
-          loading={loading}
+          loading={loading || isLoading}
           columns={wrapperColumns}
           dataSource={result?.data}
         />
