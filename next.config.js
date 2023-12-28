@@ -1,4 +1,15 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const {
+    API_HOST = 'https://localhost:3003',
+} = process.env || {};
 
-module.exports = nextConfig
+const nextConfig = {
+    async rewrites() {
+        return [
+            {
+                source: "/eapi/:path*",
+                destination: `${API_HOST}/:path*`,
+            },
+        ]
+    },
+}
