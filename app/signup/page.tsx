@@ -14,7 +14,7 @@ import {
 } from "@nextui-org/react";
 import { useState } from "react";
 
-export const MailIcon = (props) => (
+const MailIcon = (props) => (
   <svg
     aria-hidden="true"
     fill="none"
