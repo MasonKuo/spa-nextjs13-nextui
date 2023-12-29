@@ -12,6 +12,7 @@
     "sourceMap": true,
     "noImplicitReturns": false,
     "strictNullChecks": false,
+    "noUnusedParameters": false,
     "moduleResolution": "node",
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
