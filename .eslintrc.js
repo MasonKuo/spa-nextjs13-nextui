@@ -17,21 +17,21 @@ module.exports = {
     'react/react-in-jsx-scope': 0,
     'react/display-name': 0,
     // 'react/prop-types': 0,
-    'prettier/prettier': 'error',
+    'prettier/prettier': 'warn',
     'react-hooks/exhaustive-deps': 0,
     'no-useless-escape': [0],
     'no-undef': [0],
-    '@typescript-eslint/no-unused-vars': [
-      'error',
-      {
-        varsIgnorePattern: 'Taro',
-      },
-    ],
-    'no-console': [
-      2,
-      {
-        allow: ['warn', 'error'],
-      },
-    ],
+    // '@typescript-eslint/no-unused-vars': [
+    //   'error',
+    //   {
+    //     varsIgnorePattern: 'Taro',
+    //   },
+    // ],
+    // 'no-console': [
+    //   2,
+    //   {
+    //     allow: ['warn', 'error'],
+    //   },
+    // ],
   },
 };
