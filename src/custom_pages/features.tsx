@@ -154,7 +154,7 @@ const Features = (props) => {
         <ConfigTable
           loading={loading || isLoading}
           columns={wrapperColumns}
-          dataSource={result?.data ?? []}
+          dataSource={result?.data}
         />
       </div>
       <ActionsModal myref={modref} {...modalProps} />
