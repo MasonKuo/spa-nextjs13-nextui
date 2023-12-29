@@ -1,7 +1,7 @@
-import { ReactNode } from "react";
-import StepsBody from "./StepsBody";
-import StepsFooter from "./StepsFooter";
-import StepsHeader from "./StepsHeader";
+import { ReactNode } from 'react';
+import StepsBody from './StepsBody';
+import StepsFooter from './StepsFooter';
+import StepsHeader from './StepsHeader';
 
 export interface Step {
   label: String;

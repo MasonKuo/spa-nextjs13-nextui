@@ -1,8 +1,8 @@
-import { del, get, post, useRequest } from "@lib/request";
+import { del, get, post, useRequest } from '@lib/request';
 
 class UserServiceClass {
   public UserList(options?) {
-    return useRequest("/api/users", options);
+    return useRequest('/api/users', options);
   }
   public CreateUser(options?) {
     return post(`/api/users`, options);

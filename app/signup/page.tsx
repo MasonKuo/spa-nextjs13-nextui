@@ -1,18 +1,7 @@
-"use client";
+'use client';
 
-import {
-  Link,
-  CardFooter,
-  CardBody,
-  Divider,
-  Image,
-  Card,
-  CardHeader,
-  Input,
-  Spacer,
-  Button,
-} from "@nextui-org/react";
-import { useState } from "react";
+import { Link, CardFooter, CardBody, Divider, Image, Card, CardHeader, Input, Spacer, Button } from '@nextui-org/react';
+import { useState } from 'react';
 
 const MailIcon = (props) => (
   <svg
@@ -37,7 +26,7 @@ const Steps = () => ({});
 const SignUpPage = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const handleSignUp = () => {
-    window.location.replace("/");
+    window.location.replace('/');
   };
 
   return (
@@ -70,20 +59,9 @@ const SignUpPage = () => {
                 // }
               />
               <Spacer y={4} />
-              <Input
-                isClearable
-                fullWidth
-                label="Username"
-                placeholder="Enter your Username"
-              />
+              <Input isClearable fullWidth label="Username" placeholder="Enter your Username" />
               <Spacer y={4} />
-              <Input
-                isClearable
-                fullWidth
-                label="Password"
-                type="password"
-                placeholder="Enter your Password"
-              />
+              <Input isClearable fullWidth label="Password" type="password" placeholder="Enter your Password" />
             </div>
           </CardBody>
           <Divider />
@@ -91,13 +69,7 @@ const SignUpPage = () => {
             <Button color="primary" onClick={handleSignUp}>
               Sign Up
             </Button>
-            <Button
-              className="ml-2"
-              as={Link}
-              color="success"
-              href="/login"
-              variant="light"
-            >
+            <Button className="ml-2" as={Link} color="success" href="/login" variant="light">
               Login
             </Button>
           </CardFooter>

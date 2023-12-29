@@ -1,21 +1,10 @@
-"use client";
+'use client';
 
-import {
-  Link,
-  CardFooter,
-  CardBody,
-  Divider,
-  Image,
-  Card,
-  CardHeader,
-  Input,
-  Spacer,
-  Button,
-} from "@nextui-org/react";
+import { Link, CardFooter, CardBody, Divider, Image, Card, CardHeader, Input, Spacer, Button } from '@nextui-org/react';
 
 const LoginPage = () => {
   const handleLogin = () => {
-    window.location.replace("/");
+    window.location.replace('/');
   };
 
   return (
@@ -38,43 +27,21 @@ const LoginPage = () => {
           <Divider />
           <CardBody>
             <div className="">
-              <Input
-                isClearable
-                fullWidth
-                label="Username"
-                placeholder="Enter your Username"
-              />
+              <Input isClearable fullWidth label="Username" placeholder="Enter your Username" />
               <Spacer y={4} />
-              <Input
-                isClearable
-                fullWidth
-                label="Password"
-                type="password"
-                placeholder="Enter your Password"
-              />
+              <Input isClearable fullWidth label="Password" type="password" placeholder="Enter your Password" />
             </div>
           </CardBody>
           <Divider />
           <CardFooter className="justify-between">
-            <Link
-              isExternal
-              showAnchorIcon
-              size="sm"
-              href="https://github.com/nextui-org/nextui"
-            >
+            <Link isExternal showAnchorIcon size="sm" href="https://github.com/nextui-org/nextui">
               Forgot Password?
             </Link>
             <div>
               <Button color="primary" onClick={handleLogin}>
                 Login
               </Button>
-              <Button
-                className="ml-2"
-                as={Link}
-                color="success"
-                href="/signup"
-                variant="light"
-              >
+              <Button className="ml-2" as={Link} color="success" href="/signup" variant="light">
                 Sign Up
               </Button>
             </div>

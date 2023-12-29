@@ -1,11 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 const Redirect = () => {
   return (
     <>
       Redirect
-      <div className="m-2 text-red-500">
-        {/* <Link to="/portal">Back to Portal</Link> */}
-      </div>
+      <div className="m-2 text-red-500">{/* <Link to="/portal">Back to Portal</Link> */}</div>
     </>
   );
 };

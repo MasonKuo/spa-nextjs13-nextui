@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
-import { useEffect, useReducer } from "react";
-import axios from "axios";
+import { useEffect, useReducer } from 'react';
+import axios from 'axios';
 
 // import { initialResponse, responseReducer } from './reducers';
 
@@ -19,16 +19,13 @@ export const initialResponse: StateProps = {
   loading: false,
 };
 
-export function responseReducer(
-  state: StateProps,
-  action: ActionProps
-): StateProps {
+export function responseReducer(state: StateProps, action: ActionProps): StateProps {
   switch (action.type) {
-    case "init":
+    case 'init':
       return { response: null, error: null, loading: true };
-    case "success":
+    case 'success':
       return { response: action.payload, error: null, loading: false };
-    case "fail":
+    case 'fail':
       return { response: null, error: action.payload, loading: false };
     default:
       return { ...state, ...initialResponse };
@@ -66,7 +63,7 @@ interface Props {
 
 export default function useAxios({
   url,
-  method = "get",
+  method = 'get',
   options,
   trigger,
   forceDispatchEffect,
@@ -78,7 +75,7 @@ export default function useAxios({
   const dispatchEffect = forceDispatchEffect || (() => true);
 
   const onFetch = async () => {
-    dispatch({ type: "init" });
+    dispatch({ type: 'init' });
     try {
       const response = await axios({
         url,
@@ -86,12 +83,12 @@ export default function useAxios({
         ...options,
         cancelToken: source.token,
       });
-      dispatch({ type: "success", payload: response });
+      dispatch({ type: 'success', payload: response });
       customHandler?.(null, response);
     } catch (error) {
       customHandler?.(error, null);
       if (!axios.isCancel(error)) {
-        dispatch({ type: "fail", payload: error });
+        dispatch({ type: 'fail', payload: error });
       }
     }
   };
@@ -99,7 +96,7 @@ export default function useAxios({
   useEffect(() => {
     if (!url || !dispatchEffect()) return;
     // ONLY trigger by query
-    if (typeof outerTrigger === "undefined") return;
+    if (typeof outerTrigger === 'undefined') return;
 
     // Send Request
     onFetch();

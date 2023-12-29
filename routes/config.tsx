@@ -1,15 +1,15 @@
-import { lazy } from "react";
+import { lazy } from 'react';
 
 export const routes = [
   {
-    path: "/",
+    path: '/',
     auth: false,
-    component: lazy(() => import("src/custom_pages/index")),
+    component: lazy(() => import('src/custom_pages/index')),
   },
   {
-    path: "/portal",
+    path: '/portal',
     auth: false,
-    component: lazy(() => import("src/custom_pages/portal")),
+    component: lazy(() => import('src/custom_pages/portal')),
     //   children: [
     //     {
     //       path: '/Portal/Home',
@@ -28,18 +28,18 @@ export const routes = [
     //   ]
   },
   {
-    path: "/features",
+    path: '/features',
     auth: false,
-    component: lazy(() => import("src/custom_pages/features")),
+    component: lazy(() => import('src/custom_pages/features')),
   },
   {
-    path: "*",
+    path: '*',
     auth: false,
-    component: lazy(() => import("src/custom_pages/error")),
+    component: lazy(() => import('src/custom_pages/error')),
   },
   {
-    path: "/redirect",
+    path: '/redirect',
     auth: false,
-    component: lazy(() => import("src/custom_pages/redirect")),
+    component: lazy(() => import('src/custom_pages/redirect')),
   },
 ];

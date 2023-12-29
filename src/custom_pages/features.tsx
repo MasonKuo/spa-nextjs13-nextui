@@ -1,26 +1,19 @@
-import {
-  Button,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownTrigger,
-  Input,
-} from "@nextui-org/react";
-import { useRef, useState, useImperativeHandle } from "react";
-import ConfigTable, { PlusIcon } from "src/components/ConfigTable";
-import { VerticalDotsIcon, renderFn } from "src/components/data";
-import ActionsModal, { ModalProps } from "src/components/ActionsModal";
-import { UserService } from "service/user";
+import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Input } from '@nextui-org/react';
+import { useRef, useState, useImperativeHandle } from 'react';
+import ConfigTable, { PlusIcon } from 'src/components/ConfigTable';
+import { VerticalDotsIcon, renderFn } from 'src/components/data';
+import ActionsModal, { ModalProps } from 'src/components/ActionsModal';
+import { UserService } from 'service/user';
 
 const columns = [
-  { name: "ID", uid: "id", sortable: true },
-  { name: "NAME", uid: "name", sortable: true },
-  { name: "AGE", uid: "age", sortable: true },
-  { name: "ROLE", uid: "role", sortable: true },
-  { name: "TEAM", uid: "team" },
-  { name: "EMAIL", uid: "email" },
-  { name: "STATUS", uid: "status", sortable: true },
-  { name: "ACTIONS", uid: "actions" },
+  { name: 'ID', uid: 'id', sortable: true },
+  { name: 'NAME', uid: 'name', sortable: true },
+  { name: 'AGE', uid: 'age', sortable: true },
+  { name: 'ROLE', uid: 'role', sortable: true },
+  { name: 'TEAM', uid: 'team' },
+  { name: 'EMAIL', uid: 'email' },
+  { name: 'STATUS', uid: 'status', sortable: true },
+  { name: 'ACTIONS', uid: 'actions' },
 ];
 
 // export async function fetcher(...args: Parameters<typeof fetch>) {
@@ -29,7 +22,7 @@ const columns = [
 // }
 
 const initModalProps: ModalProps = {
-  title: "",
+  title: '',
   isOpen: false,
   onOK: null,
   onClose: null,
@@ -80,7 +73,7 @@ const Features = (props) => {
 
   const handleCreateUser = () => {
     setModalProps({
-      title: "Add New User",
+      title: 'Add New User',
       isOpen: true,
       onClose: initModal,
       onOK: () => {
@@ -88,9 +81,7 @@ const Features = (props) => {
         createUser(username);
         initModal();
       },
-      children: (
-        <CreatePanel myref={myref} callback={() => modref.current.onOK()} />
-      ),
+      children: <CreatePanel myref={myref} callback={() => modref.current.onOK()} />,
     });
   };
 
@@ -113,11 +104,7 @@ const Features = (props) => {
           <Dropdown>
             <DropdownTrigger>
               <Button isIconOnly size="sm" variant="light">
-                <VerticalDotsIcon
-                  className="text-default-300"
-                  width={undefined}
-                  height={undefined}
-                />
+                <VerticalDotsIcon className="text-default-300" width={undefined} height={undefined} />
               </Button>
             </DropdownTrigger>
             <DropdownMenu>
@@ -151,11 +138,7 @@ const Features = (props) => {
         Add
       </Button>
       <div className="py-2">
-        <ConfigTable
-          loading={loading || isLoading}
-          columns={wrapperColumns}
-          dataSource={result?.data}
-        />
+        <ConfigTable loading={loading || isLoading} columns={wrapperColumns} dataSource={result?.data} />
       </div>
       <ActionsModal myref={modref} {...modalProps} />
     </>

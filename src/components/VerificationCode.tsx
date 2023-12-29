@@ -1,32 +1,25 @@
-import React, { useRef, useState, useEffect } from "react";
-import {} from "@nextui-org/react";
+import React, { useRef, useState, useEffect } from 'react';
+import {} from '@nextui-org/react';
 
 export default function EnterCode({ callback, reset, isLoading }) {
-  const [code, setCode] = useState("");
+  const [code, setCode] = useState('');
 
   // Refs to control each digit input element
-  const inputRefs = [
-    useRef(null),
-    useRef(null),
-    useRef(null),
-    useRef(null),
-    useRef(null),
-    useRef(null),
-  ];
+  const inputRefs = [useRef(null), useRef(null), useRef(null), useRef(null), useRef(null), useRef(null)];
 
   // Reset all inputs and clear state
   const resetCode = () => {
     inputRefs.forEach((ref) => {
-      ref.current.value = "";
+      ref.current.value = '';
     });
     inputRefs[0].current.focus();
-    setCode("");
+    setCode('');
   };
 
   // Call our callback when code = 6 chars
   useEffect(() => {
     if (code.length === 6) {
-      if (typeof callback === "function") callback(code);
+      if (typeof callback === 'function') callback(code);
       resetCode();
     }
   }, [code]); //eslint-disable-line
@@ -52,11 +45,11 @@ export default function EnterCode({ callback, reset, isLoading }) {
     } else {
       newCode[index] = input.value;
     }
-    setCode(newCode.join(""));
+    setCode(newCode.join(''));
 
     input.select();
 
-    if (input.value === "") {
+    if (input.value === '') {
       // If the value is deleted, select previous input, if exists
       if (previousInput) {
         previousInput.current.focus();
@@ -78,11 +71,9 @@ export default function EnterCode({ callback, reset, isLoading }) {
     const previousInput = inputRefs[index - 1];
     const nextInput = inputRefs[index + 1];
 
-    if ((e.keyCode === 8 || e.keyCode === 46) && input.value === "") {
+    if ((e.keyCode === 8 || e.keyCode === 46) && input.value === '') {
       e.preventDefault();
-      setCode(
-        (prevCode) => prevCode.slice(0, index) + prevCode.slice(index + 1)
-      );
+      setCode((prevCode) => prevCode.slice(0, index) + prevCode.slice(index + 1));
       if (previousInput) {
         previousInput.current.focus();
       }
@@ -91,7 +82,7 @@ export default function EnterCode({ callback, reset, isLoading }) {
 
   // Capture pasted characters
   const handlePaste = (e) => {
-    const pastedCode = e.clipboardData.getData("text");
+    const pastedCode = e.clipboardData.getData('text');
     if (pastedCode.length === 6) {
       setCode(pastedCode);
       inputRefs.forEach((inputRef, index) => {
@@ -103,10 +94,7 @@ export default function EnterCode({ callback, reset, isLoading }) {
   // Clear button deletes all inputs and selects the first input for entry
   const ClearButton = () => {
     return (
-      <button
-        onClick={resetCode}
-        className="text-2xl absolute right-[-30px] top-3"
-      >
+      <button onClick={resetCode} className="text-2xl absolute right-[-30px] top-3">
         X
       </button>
     );
@@ -116,7 +104,7 @@ export default function EnterCode({ callback, reset, isLoading }) {
     <div className="flex gap-2 relative">
       {[0, 1, 2, 3, 4, 5].map((index) => (
         <input
-          title={"Enter Code..."}
+          title={'Enter Code...'}
           className="text-2xl bg-gray-800 text-white w-10 flex p-2 text-center"
           key={index}
           type="text"

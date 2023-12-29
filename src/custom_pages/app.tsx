@@ -1,17 +1,7 @@
-import {
-  BrowserRouter,
-  Link,
-  useLocation,
-  matchRoutes,
-  useNavigate,
-} from "react-router-dom";
-import { useRef } from "react";
-import { Router } from "../../routes/index";
-import {
-  AliveScope,
-  withAliveScope,
-  useAliveController,
-} from "react-activation";
+import { BrowserRouter, Link, useLocation, matchRoutes, useNavigate } from 'react-router-dom';
+import { useRef } from 'react';
+import { Router } from '../../routes/index';
+import { AliveScope, withAliveScope, useAliveController } from 'react-activation';
 import {
   Button,
   Link as UILink,
@@ -26,9 +16,9 @@ import {
   Tab,
   ButtonGroup,
   Chip,
-} from "@nextui-org/react";
+} from '@nextui-org/react';
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from 'react';
 // import { NextUIProvider } from "@nextui-org/system";
 
 export const AcmeLogo = () => (
@@ -45,53 +35,53 @@ export const AcmeLogo = () => (
 
 export const navList = [
   {
-    key: "index",
-    title: "Index",
-    path: "/",
+    key: 'index',
+    title: 'Index',
+    path: '/',
     static: true,
   },
   {
-    key: "features",
-    title: "Features",
-    path: "/features",
-    color: "foreground",
+    key: 'features',
+    title: 'Features',
+    path: '/features',
+    color: 'foreground',
     refresh: false,
   },
   {
-    key: "portal",
-    title: "Portal",
-    path: "/portal",
-    color: "foreground",
+    key: 'portal',
+    title: 'Portal',
+    path: '/portal',
+    color: 'foreground',
     refresh: false,
   },
   {
-    key: "integrations",
-    title: "Integrations",
-    path: "/integrations",
+    key: 'integrations',
+    title: 'Integrations',
+    path: '/integrations',
     refresh: false,
   },
   {
-    key: "integrations1",
-    title: "Integrations1",
-    path: "/integrations1",
+    key: 'integrations1',
+    title: 'Integrations1',
+    path: '/integrations1',
     refresh: false,
   },
   {
-    key: "integrations2",
-    title: "Integrations2",
-    path: "/integrations2",
+    key: 'integrations2',
+    title: 'Integrations2',
+    path: '/integrations2',
     refresh: false,
   },
   {
-    key: "integrations3",
-    title: "Integrations3",
-    path: "/integrations3",
+    key: 'integrations3',
+    title: 'Integrations3',
+    path: '/integrations3',
     refresh: false,
   },
   {
-    key: "integrations4",
-    title: "Integrations4",
-    path: "/integrations4",
+    key: 'integrations4',
+    title: 'Integrations4',
+    path: '/integrations4',
     refresh: false,
   },
 ];
@@ -110,19 +100,13 @@ const NavContainer = () => {
   return (
     <Navbar isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen}>
       <NavbarContent>
-        <NavbarMenuToggle
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className="sm:hidden"
-        />
+        <NavbarMenuToggle aria-label={isMenuOpen ? 'Close menu' : 'Open menu'} className="sm:hidden" />
         <NavbarBrand>
           <AcmeLogo />
           <p className="font-bold text-inherit">Vercel Spa</p>
         </NavbarBrand>
       </NavbarContent>
-      <NavbarContent
-        className="w-full hidden sm:flex gap-4 overflow-x-scroll scrollbar-hide"
-        justify="start"
-      >
+      <NavbarContent className="w-full hidden sm:flex gap-4 overflow-x-scroll scrollbar-hide" justify="start">
         {navList.map((i) => (
           <NavbarItem key={i.key} isActive={i.key === matchKey}>
             <Link color={i.color} to={i.path}>
@@ -145,11 +129,7 @@ const NavContainer = () => {
         {navList.map((item, index) => (
           <NavbarMenuItem key={`${item.key}-${index}`}>
             {!item.refresh ? (
-              <Link
-                color={item.color}
-                to={item.path}
-                onClick={() => setIsMenuOpen(false)}
-              >
+              <Link color={item.color} to={item.path} onClick={() => setIsMenuOpen(false)}>
                 {item.title}
               </Link>
             ) : (
@@ -205,11 +185,7 @@ export const CloseIcon = () => {
       stroke="currentColor"
       className="w-3 h-3"
     >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M6 18L18 6M6 6l12 12"
-      />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
     </svg>
   );
 };
@@ -222,15 +198,7 @@ const TabsContainer = () => {
   const location = useLocation();
   const [selectedKey, setSelectedKey] = useState<string>();
   const [activeTabs, setActiveTabs] = useState<any[]>(navList);
-  const TabHeader = ({
-    label,
-    onClick,
-    children,
-  }: {
-    label: string;
-    onClick?: any;
-    children: any;
-  }) => {
+  const TabHeader = ({ label, onClick, children }: { label: string; onClick?: any; children: any }) => {
     return (
       <ButtonGroup variant="flat" onClick={onClick}>
         <span>{label}</span>
@@ -268,7 +236,7 @@ const TabsContainer = () => {
     const parent = tabsRef?.current;
     const childs: any[] = Array.from(parent?.children);
     const childrensData = childs?.map((i) => ({
-      key: i.getAttribute("data-key"),
+      key: i.getAttribute('data-key'),
       offset: i.offsetLeft,
       _: i,
     }));

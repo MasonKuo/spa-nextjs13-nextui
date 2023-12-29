@@ -1,4 +1,4 @@
-import React, { useImperativeHandle } from "react";
+import React, { useImperativeHandle } from 'react';
 import {
   Modal,
   ModalContent,
@@ -7,7 +7,7 @@ import {
   ModalFooter,
   Button,
   //   useDisclosure,
-} from "@nextui-org/react";
+} from '@nextui-org/react';
 
 export interface ModalProps {
   children;
@@ -25,7 +25,7 @@ export default function ActionsModal({
   children,
   title,
   isOpen,
-  size = "md",
+  size = 'md',
   onOK,
   onClose,
   otherActions,

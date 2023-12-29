@@ -1,7 +1,7 @@
-import { useRoutes } from "react-router-dom";
-import { Suspense, lazy } from "react";
-import KeepAlive from "react-activation";
-import { routes } from "./config";
+import { useRoutes } from 'react-router-dom';
+import { Suspense, lazy } from 'react';
+import KeepAlive from 'react-activation';
+import { routes } from './config';
 
 //根据路径获取路由
 const checkAuth = (routers: any, path: String) => {
