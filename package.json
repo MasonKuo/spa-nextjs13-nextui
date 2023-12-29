@@ -4,15 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && next build",
-    "dbpull": "prisma db pull",
-    "dbpush": "prisma db push",
+    "build": "next build",
     "start": "next start -p 3002",
     "lint": "next lint"
   },
   "dependencies": {
     "@nextui-org/react": "^2.1.13",
-    "@prisma/client": "^5.4.2",
     "@tanstack/react-table": "^8.10.7",
     "@types/node": "20.6.2",
     "@types/react": "18.2.21",
@@ -36,7 +33,5 @@
     "typescript": "5.2.2",
     "winston": "^3.11.0"
   },
-  "devDependencies": {
-    "prisma": "^5.4.2"
-  }
+  "devDependencies": {}
 }

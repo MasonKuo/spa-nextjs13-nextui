@@ -9,6 +9,7 @@
     "esModuleInterop": true,
     "module": "esnext",
     "noImplicitAny": false,
+    "sourceMap": true,
     "noImplicitReturns": false,
     "strictNullChecks": false,
     "moduleResolution": "node",
