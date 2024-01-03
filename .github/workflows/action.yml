@@ -35,6 +35,5 @@ jobs:
           last_ssh: | # 在服务器上执行
             cd /var/www/spa
             tar -xzvf dist.tar
-            pm2 delete single-page-app
             cd /home/admin
             bash spa-nextjs-start.sh
