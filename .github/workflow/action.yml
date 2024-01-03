@@ -1,0 +1,40 @@
+name: spa-pages-wf
+
+on: [push]
+
+jobs:
+  deploy_job:
+    runs-on: ubuntu-latest
+    name: build & deploy
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install and Build 🔧 # This example project is built using npm and outputs the result to the 'build' folder. Replace with the commands required to build your project, or remove this step entirely if your site is pre-built.
+        run: |
+          yarn  # 安装依赖
+          yarn build  # 执行打包
+          rm -rf ./node_modules #删除 node_modules
+          tar -czvf dist.tar ./ # 目标文件进行打包
+      - name: Deploy file
+        uses: cross-the-world/ssh-scp-ssh-pipelines@latest
+        env:
+          WELCOME: "ssh scp ssh pipelines"
+          LASTSSH: "Doing something after copying"
+        with:
+          host: ${{ secrets.FTP_SERVER }}
+          user: ${{ secrets.FTP_USERNAME }}
+          pass: ${{ secrets.FTP_PASSWORD }}
+          port: ${{ secrets.FTP_PORT }}
+        #   first_ssh: |
+        #     rm -rf /usr/local/webserver/nginx/html/dist
+        #     mkdir -p /usr/local/webserver/nginx/html/dist
+          scp: |
+            ./dist.tar' => /var/www/spa
+          # local_path: "./*"
+          # remote_path: "/var/www/app"
+          last_ssh: | # 在服务器上执行
+            cd /var/www/spa
+            tar -xzvf dist.tar
+            pm2 delete single-page-app
+            cd /home/admin
+            bash spa-nextjs-start.sh
