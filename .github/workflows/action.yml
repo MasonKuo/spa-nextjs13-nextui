@@ -14,20 +14,20 @@ jobs:
           yarn  # 安装依赖
           yarn build  # 执行打包
           # rm -rf ./node_modules #删除 node_modules
-          tar -czvf dist.tar .next package.json .env .env.production next.config.js server.js # 目标文件进行打包
+          tar -czvf dist.tar .next package.json .env.production next.config.js server.js # 目标文件进行打包
       - name: Deploy file
         uses: cross-the-world/ssh-scp-ssh-pipelines@latest
         env:
-          WELCOME: "ssh scp ssh pipelines"
-          LASTSSH: "Doing something after copying"
+          WELCOME: 'ssh scp ssh pipelines'
+          LASTSSH: 'Doing something after copying'
         with:
           host: ${{ secrets.FTP_SERVER }}
           user: ${{ secrets.FTP_USERNAME }}
           pass: ${{ secrets.FTP_PASSWORD }}
           port: ${{ secrets.FTP_PORT }}
-        #   first_ssh: |
-        #     rm -rf /usr/local/webserver/nginx/html/dist
-        #     mkdir -p /usr/local/webserver/nginx/html/dist
+          #   first_ssh: |
+          #     rm -rf /usr/local/webserver/nginx/html/dist
+          #     mkdir -p /usr/local/webserver/nginx/html/dist
           scp: |
             ./dist.tar' => /var/www/spa
           # local_path: "./*"
