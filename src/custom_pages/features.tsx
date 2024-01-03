@@ -66,7 +66,7 @@ const Features = (props) => {
       await UserService.CreateUser({ name });
       toggle();
     } catch (error: any) {
-      alert(JSON.stringify(error?.response?.data?.msg));
+      alert(JSON.stringify(error?.response?.data?.message));
     }
     setIsLoading(false);
   };
@@ -92,7 +92,7 @@ const Features = (props) => {
       // alert("Del User Success!");
       toggle();
     } catch (error: any) {
-      alert(JSON.stringify(error?.response?.data?.msg));
+      alert(JSON.stringify(error?.response?.data?.message));
     }
     setIsLoading(false);
   };
