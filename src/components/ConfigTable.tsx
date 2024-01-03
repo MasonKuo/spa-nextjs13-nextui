@@ -112,7 +112,7 @@ export default function ConfigTable({ loading = false, columns = [], dataSource 
   }, [visibleColumns]);
 
   const filteredItems = React.useMemo(() => {
-    let filteredUsers = [...dataSource];
+    let filteredUsers = [...(dataSource ?? [])];
 
     if (hasSearchFilter) {
       filteredUsers = filteredUsers.filter((user) => user.name.toLowerCase().includes(filterValue.toLowerCase()));
