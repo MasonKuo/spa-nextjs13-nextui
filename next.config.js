@@ -10,7 +10,7 @@ const nextConfig = {
     async rewrites() {
         return [
             {
-                source: '/api/:path*',
+                source: '/be_api/:path*',
                 destination: `${API_HOST}/:path*`,
                 locale: false,
             },
