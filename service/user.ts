@@ -2,13 +2,13 @@ import { del, get, post, useRequest } from '@lib/request';
 
 class UserServiceClass {
   public UserList(options?) {
-    return useRequest('/be_api/users', options);
+    return useRequest('/api/users', options);
   }
   public CreateUser(options?) {
-    return post(`/be_api/users`, options);
+    return post(`/api/users`, options);
   }
   public DelUser(id, options?) {
-    return del(`/be_api/users/${id}`, options);
+    return del(`/api/users/${id}`, options);
   }
 }
 
