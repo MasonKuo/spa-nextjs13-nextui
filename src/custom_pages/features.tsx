@@ -138,7 +138,7 @@ const Features = (props) => {
         Add
       </Button>
       <div className="py-2">
-        <ConfigTable loading={loading || isLoading} columns={wrapperColumns} dataSource={result?.data} />
+        <ConfigTable loading={loading || isLoading} columns={wrapperColumns} dataSource={result?.data?.data} />
       </div>
       <ActionsModal myref={modref} {...modalProps} />
     </>
