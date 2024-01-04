@@ -2,6 +2,7 @@
 
 import { Link, CardFooter, CardBody, Divider, Image, Card, CardHeader, Input, Spacer, Button } from '@nextui-org/react';
 import { useState } from 'react';
+import { EmailService } from 'service/common';
 
 const MailIcon = (props) => (
   <svg
@@ -25,7 +26,12 @@ const Steps = () => ({});
 
 const SignUpPage = () => {
   const [currentStep, setCurrentStep] = useState(0);
-  const handleSignUp = () => {
+  const [email, setEmail] = useState('');
+  const handleSendCode = async () => {
+    await EmailService.SendCode({ email });
+  };
+
+  const handleSignUp = async () => {
     window.location.replace('/');
   };
 
@@ -49,15 +55,22 @@ const SignUpPage = () => {
           <Divider />
           <CardBody>
             <div className="">
-              <Input
-                isClearable
-                fullWidth
-                label="Email"
-                placeholder="you@example.com"
-                // startContent={
-                //   <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
-                // }
-              />
+              <div className="flex items-center">
+                <Input
+                  isClearable
+                  fullWidth
+                  label="Email"
+                  placeholder="you@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  // startContent={
+                  //   <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+                  // }
+                />
+                <Button size="lg" variant="light" onClick={handleSendCode}>
+                  验证码
+                </Button>
+              </div>
               <Spacer y={4} />
               <Input isClearable fullWidth label="Username" placeholder="Enter your Username" />
               <Spacer y={4} />
