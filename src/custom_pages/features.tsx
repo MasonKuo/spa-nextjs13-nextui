@@ -1,4 +1,4 @@
-import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Input } from '@nextui-org/react';
+import { Button, Chip, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Input } from '@nextui-org/react';
 import { useRef, useState, useImperativeHandle } from 'react';
 import ConfigTable, { PlusIcon } from 'src/components/ConfigTable';
 import { VerticalDotsIcon, renderFn } from 'src/components/data';
@@ -56,7 +56,7 @@ const Features = (props) => {
   const toggle = () => setCache(new Date().getTime());
   const [isLoading, setIsLoading] = useState(false);
 
-  const { loading, result } = UserService.UserList({
+  const { loading, result, error } = UserService.UserList({
     trigger: cache,
   });
 
@@ -139,6 +139,7 @@ const Features = (props) => {
       </Button>
       <div className="py-2">
         <ConfigTable loading={loading || isLoading} columns={wrapperColumns} dataSource={result?.data?.data} />
+        {error && <Chip color="danger">{error?.response?.data?.message}</Chip>}
       </div>
       <ActionsModal myref={modref} {...modalProps} />
     </>
