@@ -28,7 +28,11 @@ const SignUpPage = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [email, setEmail] = useState('');
   const handleSendCode = async () => {
-    await EmailService.SendCode({ email });
+    try {
+      await EmailService.SendCode({ email });
+    } catch (error: any) {
+      alert(error?.response?.data?.message);
+    }
   };
 
   const handleSignUp = async () => {
@@ -57,12 +61,11 @@ const SignUpPage = () => {
             <div className="">
               <div className="flex items-center">
                 <Input
-                  isClearable
                   fullWidth
                   label="Email"
                   placeholder="you@example.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  // value={email}
+                  // onChange={(e) => setEmail(e.target.value)}
                   // startContent={
                   //   <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
                   // }
@@ -72,9 +75,9 @@ const SignUpPage = () => {
                 </Button>
               </div>
               <Spacer y={4} />
-              <Input isClearable fullWidth label="Username" placeholder="Enter your Username" />
+              <Input label="Username" placeholder="Enter your Username" />
               <Spacer y={4} />
-              <Input isClearable fullWidth label="Password" type="password" placeholder="Enter your Password" />
+              <Input label="Password" type="password" placeholder="Enter your Password" />
             </div>
           </CardBody>
           <Divider />
